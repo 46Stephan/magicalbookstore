@@ -1,6 +1,8 @@
 import React from "react";
+import {Book} from "./book";
 
-interface BookDetailsProps{
+
+export interface BookDetailsProps{
     book: Book;
     onClose: () => void;
 }

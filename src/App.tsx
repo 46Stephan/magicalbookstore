@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import {BookList} from './components/booklist';
-import {BookDetails} from './components/bookdetails';
-import './App.css'
+import BookDetails from './components/bookdetails';
+import BookList from './components/booklist';
+import {Book} from './components/book';
+import './App.css';
+
+
 
 const App: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -14,7 +17,7 @@ const App: React.FC = () => {
     genre: "",
     description: "",
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [editingBook, setEditingBook] = useState<Book | null>(null);
 
   const handleAddBook = () => {
@@ -52,7 +55,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Minha Coleção de Livros</h1>
+      <h1>Magical BookStore</h1>
       <div>
         <h2>Adicionar Novo Livro</h2>
         <input

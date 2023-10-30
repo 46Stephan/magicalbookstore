@@ -1,6 +1,7 @@
 import React from "react";
+import {Book} from "./book";
 
-interface BookListProps {
+export interface BookListProps {
   books: Book[];
   onEdit: (book: Book) => void;
   onDelete: (id: number) => void;
