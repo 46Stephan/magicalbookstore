@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BookDetails from './components/bookdetails';
 import BookList from './components/booklist';
 import {Book} from './components/book';
+import EditBook from './components/editbook';
 import './App.css';
 
 
