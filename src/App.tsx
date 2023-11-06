@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import BookDetails from './components/bookdetails';
-import BookList from './components/booklist';
 import {Book} from './components/book';
 import EditBook from './components/editbook';
 import './App.css';
@@ -19,8 +17,8 @@ const App: React.FC = () => {
     description: "",
   });
 
+  const [] = useState<Book | null>(null);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
-
   const handleAddBook = () => {
     if (newBook.title && newBook.author && newBook.publicationYear) {
       if (newBook.publicationYear <= new Date().getFullYear()) {
@@ -52,6 +50,19 @@ const App: React.FC = () => {
       const updatedBooks = books.filter((book) => book.id !== id);
       setBooks(updatedBooks);
     }
+  };
+
+  const handleEditBook = (book: Book) => {
+    setEditingBook(book);
+  
+  }
+
+  const handleUpdateBook = (updatedBook: Book) => {
+    const updatedBooks = books.map((book) =>
+      book.id === updatedBook.id ? updatedBook : book
+    );
+    setBooks(updatedBooks);
+    setEditingBook(null);
   };
 
   return (
@@ -86,12 +97,18 @@ const App: React.FC = () => {
         <ul>
           {books.map((book) => (
             <li key={book.id}>
-              {book.title} - {book.author} ({book.publicationYear})
-              <button onClick={() => handleDeleteBook(book.id)}>Excluir</button>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span>{book.title} - {book.author} ({book.publicationYear})</span>
+                <button onClick={() => handleEditBook(book)}>Editar</button>
+                <button onClick={() => handleDeleteBook(book.id)}>Excluir</button>
+              </div>
             </li>
           ))}
         </ul>
       </div>
+      {editingBook && (
+        <EditBook book={editingBook} onUpdateBook={handleUpdateBook} />
+      )}
     </div>
   );
 };
